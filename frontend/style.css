@@ -151,9 +151,15 @@ body {
     padding: 0;
 }
 
-/* Header - Hidden */
+/* Header */
 header {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 1.5rem 2rem;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
 header h1 {
