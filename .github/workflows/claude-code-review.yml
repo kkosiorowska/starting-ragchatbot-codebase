@@ -37,6 +37,9 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
+          # Allow reviewing commits pushed by Claude itself (e.g. after fixing review feedback)
+          allowed_bots: 'claude'
+
           # Prompt for automated review (no @claude mention needed)
           prompt: |
             Please review this pull request and provide feedback on:
