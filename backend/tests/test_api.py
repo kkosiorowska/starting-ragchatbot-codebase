@@ -5,15 +5,17 @@ rather than importing backend/app.py directly, since app.py mounts static
 files from ../frontend at import time which isn't available in the test
 environment.
 """
-import pytest
 
+import pytest
 
 pytestmark = pytest.mark.api
 
 
 class TestQueryEndpoint:
     def test_query_without_session_id_creates_session(self, client, mock_rag_system):
-        response = client.post("/api/query", json={"query": "What is covered in lesson 1?"})
+        response = client.post(
+            "/api/query", json={"query": "What is covered in lesson 1?"}
+        )
 
         assert response.status_code == 200
         data = response.json()
@@ -25,7 +27,10 @@ class TestQueryEndpoint:
     def test_query_with_existing_session_id_is_reused(self, client, mock_rag_system):
         response = client.post(
             "/api/query",
-            json={"query": "What is covered in lesson 1?", "session_id": "existing_session"},
+            json={
+                "query": "What is covered in lesson 1?",
+                "session_id": "existing_session",
+            },
         )
 
         assert response.status_code == 200
@@ -67,7 +72,9 @@ class TestCoursesEndpoint:
         assert data["course_titles"] == ["Course A", "Course B"]
 
     def test_get_course_stats_propagates_error_as_500(self, client, mock_rag_system):
-        mock_rag_system.get_course_analytics.side_effect = RuntimeError("analytics unavailable")
+        mock_rag_system.get_course_analytics.side_effect = RuntimeError(
+            "analytics unavailable"
+        )
 
         response = client.get("/api/courses")
 

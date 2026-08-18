@@ -54,3 +54,15 @@ The application will be available at:
 - Web Interface: `http://localhost:8000`
 - API Documentation: `http://localhost:8000/docs`
 
+## Development
+
+This project uses [black](https://black.readthedocs.io/) to keep Python code formatting consistent.
+
+```bash
+# Auto-format the codebase
+./scripts/format.sh
+
+# Check formatting without making changes (e.g. in CI)
+./scripts/check.sh
+```
+

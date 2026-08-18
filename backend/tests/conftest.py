@@ -1,4 +1,5 @@
 """Shared pytest fixtures for the backend test suite."""
+
 import sys
 from pathlib import Path
 from typing import List, Optional
@@ -15,14 +16,16 @@ if str(BACKEND_DIR) not in sys.path:
 
 from models import Course, CourseChunk, Lesson  # noqa: E402
 
-
 # ---------------------------------------------------------------------------
 # Sample domain data
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture
 def sample_lesson() -> Lesson:
-    return Lesson(lesson_number=1, title="Introduction", lesson_link="https://example.com/lesson1")
+    return Lesson(
+        lesson_number=1, title="Introduction", lesson_link="https://example.com/lesson1"
+    )
 
 
 @pytest.fixture
@@ -49,6 +52,7 @@ def sample_course_chunk() -> CourseChunk:
 # Mocked RAG system
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture
 def mock_rag_system():
     """A MagicMock standing in for RAGSystem, pre-wired with sane defaults."""
@@ -71,6 +75,7 @@ def mock_rag_system():
 # to exist. To avoid that import-time failure, the API routes are redefined
 # here on a standalone app that depends on an injected rag_system instead of
 # importing backend/app.py directly.
+
 
 class QueryRequest(BaseModel):
     query: str
